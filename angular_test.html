@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<title>Angular Test</title>
+<style>
+	input{
+		margin:auto;
+		display:block;
+		font-size:1.25em;	
+	}
+	
+	input.ng-valid{
+		background:#0d0;
+	}
+	
+	input.ng-invalid{
+		background:#d00;	
+	}
+	
+</style>
+<script src="angular.min.js"></script>
+</head>
+
+<body>
+	<div ng-app="angTest" ng-controller="angCont">
+		<h3 style="text-align:center;">Red = Invalid, Green = Valid</h3>
+		<form name="inpForm">
+			<input type="text" name="fName" ng-model="firstName" placeholder="First Name" required="required"/>
+			<input type="text" name="mName" ng-model="midName" placeholder="Middle Name" required="required"/>
+			<input type="text" name="lName" ng-model="lastName" placeholder="Last Name" required="required"/>
+			<input type="date" name="date" ng-model="date" placeholder="Date" required="required"/>
+			<input type="number" name="num" ng-model="num" placeholder="Number" required="required"/>
+			<input type="submit" ng-click="checkVals()"/>
+		</form>
+	</div>
+	
+	<script>
+	var app = angular.module("angTest", []);
+	app.controller('angCont', function($scope){
+		$scope.checkVals = function(){
+			var output = "";
+		
+			if(!$scope.inpForm.fName.$valid)
+			{output += "Invalid First Name\n";}
+			
+			if(!$scope.inpForm.mName.$valid)
+			{output += "Invalid Middle Name\n";}
+
+			if(!$scope.inpForm.lName.$valid)
+			{output += "Invalid Last Name\n";}
+
+			if(!$scope.inpForm.date.$valid)
+			{output += "Invalid Date\n";}
+
+			if(!$scope.inpForm.num.$valid)
+			{output += "Invalid Number";}
+			
+			if(output.length > 0)
+			{alert(output);}
+			else
+			{
+				alert("All fields valid");
+				//TOOD: submit to where?
+			}
+		};
+	});
+
+</script>
+
+</body>
+
+</html>
